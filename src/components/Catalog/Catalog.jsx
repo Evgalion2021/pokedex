@@ -4,77 +4,37 @@ import classes from "./Catalog.module.scss"
 import Pokemon from "./Pokemon/Pokemon";
 
 const Catalog = () => {
-    let arrayFromServer = [];
+    let pokemonList = [];
 
-    let bulbasaurInfo = null;
 
-    let getTenPokemons = () => {
+
+    let get10Pokemons = () => {
         axios.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10").then(responce => {
-            arrayFromServer = responce.data.results;
-            console.log(arrayFromServer)
+            return pokemonList = responce.data.results;
         });
     }
-    let getOnePokemonInfo = () => {
-        axios.get("https://pokeapi.co/api/v2/pokemon/bulbasaur").then(responce => {
-            bulbasaurInfo = {
-                id: responce.data.id,
-                firstTag: responce.data.types[0].type.name,
-                secondTag: responce.data.types[0].type.name
-            }
-            console.log(bulbasaurInfo);
-        })
+
+    let get10PokemonsWithDescription = () => {
+        for (let i = 0; i < pokemonList.length; i++) {
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonList[i].name}`).then(
+                responce => {
+                    return pokemonList[i] = {
+                        id: responce.data.id,
+                        img: responce.data.sprites.other['official-artwork'].front_default,
+                        firstTag: responce.data.types[0].name,
+                        secondTag: responce.data.types[1].name,
+                    }
+
+                }
+            )
+        }
     }
 
-    getTenPokemons();
-    getOnePokemonInfo();
+    get10Pokemons()
+    get10PokemonsWithDescription()
+    console.log(pokemonList)
 
-
-
-    let firstTestPokemonArray = [
-        {
-            name: "BULBASAUR",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
-            id: "№001",
-            firstTag: "Grass",
-            secondTag: "Poison"
-        },
-        {
-            name: "IVYSAUR",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png",
-            id: "№002",
-            firstTag: "Grass",
-            secondTag: "Poison"
-        },
-        {
-            name: "VENASAUR",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
-            id: "№003",
-            firstTag: "Grass",
-            secondTag: "Poison"
-        },
-        {
-            name: "CHARMANDER",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png",
-            id: "№004",
-            firstTag: "Fire",
-            secondTag: null
-        },
-        {
-            name: "CHARMELEON",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/005.png",
-            id: "№005",
-            firstTag: "Fire",
-            secondTag: null
-        },
-        {
-            name: "CHARIZARD",
-            img: "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png",
-            id: "№006",
-            firstTag: "Fire",
-            secondTag: "Flying"
-        }
-    ]
-    let secondTestPokemonArray = firstTestPokemonArray.map(
+    let pokemonListWithDescriptions = pokemonList.map(
         (pokemon) => {
             return <Pokemon
                 img={pokemon.img} id={pokemon.id} name={pokemon.name} firstTag={pokemon.firstTag} secondTag={pokemon.secondTag} />
@@ -82,7 +42,7 @@ const Catalog = () => {
     )
 
     return (<div className={classes.container}><Row>
-        {secondTestPokemonArray}
+        {pokemonListWithDescriptions}
     </Row></div>
 
     );
