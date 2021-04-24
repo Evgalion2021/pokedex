@@ -1,6 +1,10 @@
+import { Col, Row } from "antd";
+
 const Filter = () => {
     return (
-        <div>FILTER</div>
+        <Row>
+            <Col xs={24} sm={12} md={8} lg={6}>qq</Col>
+        </Row>
     );
 }
 
