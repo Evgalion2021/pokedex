@@ -1,12 +1,11 @@
 import { Row } from "antd";
 import axios from "axios";
+import { makeAutoObservable } from "mobx";
 import classes from "./Catalog.module.scss"
 import Pokemon from "./Pokemon/Pokemon";
 
 const Catalog = () => {
     let pokemonList = [];
-
-
 
     let get10Pokemons = () => {
         axios.get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10").then(responce => {

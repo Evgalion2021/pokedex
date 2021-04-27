@@ -2,16 +2,17 @@ import { Col } from "antd";
 import classes from "./Pokemon.module.scss"
 
 const Pokemon = (props) => {
-    return (
 
+    return (
         <Col xs={24} sm={12} md={8} lg={6}>
             <div className={classes.item}>
-                <img src={props.img}></img>
+                <img src={props.img} className={classes.img}></img>
                 <div className={classes.description}><div>{props.id}</div>
                     <div>{props.name}</div>
                     <div>
-                        <div className={classes.tag}>{props.firstTag}</div>
-                        <div className={classes.tag}>{props.secondTag}</div>
+                        {props.tags.map((tag) => {
+                            return <div className={classes.tag}>{tag.type.name}</div>
+                        })}
                     </div>
                 </div>
             </div>

@@ -1,14 +1,20 @@
+import { useState } from "react";
 import "./App.css";
-import Catalog from "./components/Catalog/Catalog";
+import CatalogTest from "./components/Catalog/CatalogTest";
 import Filter from "./components/Filter/Filter";
 import Paginator from "./components/Pagitanor/Paginator";
 
 function App() {
+  const [pageOptions, setPageOptions] = useState({currentPage: 1,
+  pageSize: 10});
+  const handlerChangePageOptions = (pageNumber, size) => {
+    setPageOptions({pageNumber, size})
+  }
   return (
     <div>
       <Filter />
-      <Catalog />
-      <Paginator />
+      <CatalogTest pageSize={pageOptions.size} currentPage={pageOptions.pageNumber}/>
+      <Paginator onChangePage={handlerChangePageOptions}/>
     </div>
   );
 }
