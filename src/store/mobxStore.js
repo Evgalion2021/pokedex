@@ -8,7 +8,6 @@ export function pokemonStoreFunction() {
         currentPage: 1,
         pageSize: 10,
       },
-      pokemons = [],
       handleChangePageOptions(pageNumber, size) {
         this.pageOptions.currentPage = pageNumber;
         this.pageOptions.pageSize = size;
