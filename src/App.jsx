@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import "./App.css";
-import CatalogTest from "./components/Catalog/CatalogTest";
+import Catalog from "./components/Catalog/Catalog";
 import Filter from "./components/Filter/Filter";
 import Paginator from "./components/Pagitanor/Paginator";
 import { useStore } from "./hooks/useStore";
@@ -14,7 +14,7 @@ const App = observer(() => {
         tags={store.tags}
         getTags={store.getTags}
         changeSelectedTags={store.handleChangeSelectedTags} />
-      <CatalogTest
+      <Catalog
         currentPage={store.pageOptions.currentPage}
         pageSize={store.pageOptions.pageSize}
         getPokemons={store.getPokemons}
