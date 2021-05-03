@@ -1,13 +1,23 @@
-import { Col, Row } from "antd";
+import { Select } from 'antd';
+import { useEffect } from 'react';
 
-const Filter = () => {
-  return (
-    <div>
-      <button>Вперед</button>
-      <img></img>
-      <button>Назад</button>
-    </div>
+const Filter = ({ getTags, tags, changeSelectedTags }) => {
+  useEffect(() => {
+    getTags();
+  }, [getTags]);
+  const { Option } = Select;
+  const children = [];
+  for (let i = 0; i < tags.length; i++) {
+    children.push(<Option key={tags[i]}>{tags[i]}</Option>);
+  }
+
+
+  return (<>
+    <Select mode="tags" style={{ width: '25%' }} placeholder="Tags Mode" onChange={changeSelectedTags}>
+      {children}
+    </Select>
+  </>
   );
-}
+};
 
 export default Filter;

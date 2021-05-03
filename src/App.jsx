@@ -1,18 +1,27 @@
 import { observer } from "mobx-react";
-import { useState } from "react";
 import "./App.css";
 import CatalogTest from "./components/Catalog/CatalogTest";
 import Filter from "./components/Filter/Filter";
 import Paginator from "./components/Pagitanor/Paginator";
+import { useStore } from "./hooks/useStore";
 
-const App = observer((props) => {
+const App = observer(() => {
+  const store = useStore();
+
   return (
     <div>
-      <Filter />
-      <CatalogTest pageSize={props.store.pageOptions.pageSize} currentPage={props.store.pageOptions.currentPage} />
-      <Paginator onChangePage={props.store.handleChangePageOptions} />
+      <Filter
+        tags={store.tags}
+        getTags={store.getTags}
+        changeSelectedTags={store.handleChangeSelectedTags} />
+      <CatalogTest
+        currentPage={store.pageOptions.currentPage}
+        pageSize={store.pageOptions.pageSize}
+        getPokemons={store.getPokemons}
+        pokemons={store.pokemons} />
+      <Paginator onChange={store.handleChangePageOptions} />
     </div>
   );
-})
+});
 
 export default App;

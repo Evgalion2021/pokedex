@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { pokemonStoreFunction } from './store/mobxStore';
+import Context from './context/Context';
+
 const store = pokemonStoreFunction();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App store={store} />
-  </React.StrictMode>,
+  <Context.Provider value={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Context.Provider>,
   document.getElementById('root'),
 );
 
