@@ -15,4 +15,10 @@ export const pokemonAPI = {
   getTags() {
     return instance.get(`type`);
   },
+  getPokemonsWithTag(tag) {
+    return instance.get(`type/${tag}/`);
+  },
+  getAllPokemons(totalPokemonCount) {
+    return instance.get(`pokemon/?limit=${totalPokemonCount}`);
+  },
 };
