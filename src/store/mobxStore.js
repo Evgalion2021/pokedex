@@ -155,6 +155,7 @@ export function pokemonStoreFunction() {
       selectedTags: observable,
       pokemonsWithTags: observable,
       selectedPokemonName: observable,
+      foundPokemon: observable,
       handleChangePageOptions: action.bound,
       getPokemons: action.bound,
       getTags: action.bound,
