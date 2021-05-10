@@ -10,7 +10,7 @@ export function pokemonStoreFunction() {
         totalCount: 1118,
       },
       pokemons: [],
-      pokemonsWithTags: [],
+      pokemonsWithTags: {},
       selectedTags: [],
       selectedPokemonName: '',
       tags: [],
@@ -61,6 +61,7 @@ export function pokemonStoreFunction() {
       },
       handleChangeSelectedTags(tag) {
         this.selectedTags = tag;
+        console.log(this.selectedTags);
       },
       getTagColor(tag) {
         switch (tag) {
@@ -130,6 +131,7 @@ export function pokemonStoreFunction() {
       },
       getSelectedPokemonName(pokemonName) {
         this.selectedPokemonName = pokemonName;
+        console.log(this.selectedPokemonName);
       },
       findSelectedPokemon(pokemonName) {
         pokemonAPI
@@ -143,8 +145,8 @@ export function pokemonStoreFunction() {
             });
             runInAction(() => {
               this.foundPokemon = searchResult;
-              console.log(this.foundPokemon);
             });
+            console.log(this.foundPokemon);
           });
       },
     },
@@ -163,6 +165,6 @@ export function pokemonStoreFunction() {
       getPokemonsWithTags: action.bound,
       getSelectedPokemonName: action.bound,
       findSelectedPokemon: action.bound,
-    },
+    }
   );
 }

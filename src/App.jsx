@@ -34,6 +34,7 @@ const App = observer(() => {
         pokemonsWithTags={store.pokemonsWithTags}
         findSelectedPokemon={store.findSelectedPokemon}
         selectedPokemonName={store.selectedPokemonName}
+        foundPokemon={store.foundPokemon}
       />
       <Paginator
         onChange={store.handleChangePageOptions}

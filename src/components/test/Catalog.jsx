@@ -14,7 +14,6 @@ const Catalog = ({
   findSelectedPokemon,
   selectedPokemonName,
   pokemonsWithTags,
-  foundPokemon,
 }) => {
   useEffect(() => {
     if (selectedTags.length) {
@@ -32,7 +31,6 @@ const Catalog = ({
     getPokemonsWithTags,
     selectedPokemonName,
     findSelectedPokemon,
-    foundPokemon,
   ]);
   const currentContent = useMemo(() => {
     if (selectedTags.length) {
@@ -51,11 +49,7 @@ const Catalog = ({
         </div>
       );
     } else if (selectedPokemonName) {
-      if (foundPokemon) {
-        return <div>{foundPokemon}</div>;
-      } else {
-        return <div>pokemon named {selectedPokemonName} doesn't exist</div>;
-      }
+      return <div>SelectedNamePage</div>;
     } else {
       return (
         <Row>
@@ -77,7 +71,6 @@ const Catalog = ({
     pokemons,
     getTagColor,
     pokemonsWithTags,
-    foundPokemon,
   ]);
 
   return <div className={classes.container}>{currentContent}</div>;
