@@ -9,18 +9,18 @@ const Catalog = ({
   getPokemons,
   pokemons,
   getTagColor,
-  getPokemonsWithTags,
+  getPokemonsSelectedByTags,
   selectedTags,
-  findSelectedPokemon,
-  selectedPokemonName,
-  pokemonsWithTags,
-  foundPokemon,
+  searchPokemonByName,
+  pokemonNameForSearch,
+  pokemonsSelectedByTags,
+  currentPokemonToShow,
 }) => {
   useEffect(() => {
     if (selectedTags.length) {
-      getPokemonsWithTags(selectedTags);
-    } else if (selectedPokemonName) {
-      findSelectedPokemon(selectedPokemonName);
+      getPokemonsSelectedByTags(selectedTags);
+    } else if (pokemonNameForSearch) {
+      searchPokemonByName(pokemonNameForSearch);
     } else {
       getPokemons(currentPage, pageSize);
     }
@@ -29,20 +29,21 @@ const Catalog = ({
     pageSize,
     getPokemons,
     selectedTags,
-    getPokemonsWithTags,
-    selectedPokemonName,
-    findSelectedPokemon,
-    foundPokemon,
+    getPokemonsSelectedByTags,
+    pokemonNameForSearch,
+    searchPokemonByName,
   ]);
+  console.log(currentPokemonToShow);
+
   const currentContent = useMemo(() => {
     if (selectedTags.length) {
       return (
         <div>
-          {Object.keys(pokemonsWithTags).map((key) => {
+          {Object.keys(pokemonsSelectedByTags).map((key) => {
             return (
               <>
                 <h2>{key}</h2>
-                {pokemonsWithTags[key].map((name) => {
+                {pokemonsSelectedByTags[key].map((name) => {
                   return <span>{name} </span>;
                 })}
               </>
@@ -50,11 +51,14 @@ const Catalog = ({
           })}
         </div>
       );
-    } else if (selectedPokemonName) {
-      if (foundPokemon) {
-        return <div>{foundPokemon}</div>;
+    } else if (pokemonNameForSearch) {
+      if (currentPokemonToShow) {
+        {
+          console.log(currentPokemonToShow);
+        }
+        return <div>{currentPokemonToShow.name}</div>;
       } else {
-        return <div>pokemon named {selectedPokemonName} doesn't exist</div>;
+        return <div>pokemon named {pokemonNameForSearch} doesn't exist</div>;
       }
     } else {
       return (
@@ -73,11 +77,11 @@ const Catalog = ({
     }
   }, [
     selectedTags,
-    selectedPokemonName,
+    pokemonNameForSearch,
     pokemons,
     getTagColor,
-    pokemonsWithTags,
-    foundPokemon,
+    pokemonsSelectedByTags,
+    currentPokemonToShow,
   ]);
 
   return <div className={classes.container}>{currentContent}</div>;

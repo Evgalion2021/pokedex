@@ -7,7 +7,7 @@ const Filter = ({
   getTags,
   tags,
   changeSelectedTags,
-  getSelectedPokemonName,
+  getPokemonNameForSearch,
 }) => {
   useEffect(() => {
     getTags();
@@ -33,7 +33,7 @@ const Filter = ({
       <Search
         style={{ width: '40%', textAlign: 'right', marginLeft: '10%' }}
         placeholder='Pokemon Name Search'
-        onSearch={getSelectedPokemonName}
+        onSearch={getPokemonNameForSearch}
         enterButton
       />
     </div>

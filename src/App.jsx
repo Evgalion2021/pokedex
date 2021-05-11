@@ -21,7 +21,7 @@ const App = observer(() => {
         tags={store.tags}
         getTags={store.getTags}
         changeSelectedTags={store.handleChangeSelectedTags}
-        getSelectedPokemonName={store.getSelectedPokemonName}
+        getPokemonNameForSearch={store.getPokemonNameForSearch}
       />
       <Catalog
         currentPage={store.pageOptions.currentPage}
@@ -29,12 +29,12 @@ const App = observer(() => {
         getPokemons={store.getPokemons}
         pokemons={store.pokemons}
         getTagColor={store.getTagColor}
-        getPokemonsWithTags={store.getPokemonsWithTags}
+        getPokemonsSelectedByTags={store.getPokemonsSelectedByTags}
         selectedTags={store.selectedTags}
-        pokemonsWithTags={store.pokemonsWithTags}
-        findSelectedPokemon={store.findSelectedPokemon}
-        selectedPokemonName={store.selectedPokemonName}
-        foundPokemon={store.foundPokemon}
+        pokemonsSelectedByTags={store.pokemonsSelectedByTags}
+        searchPokemonByName={store.searchPokemonByName}
+        pokemonNameForSearch={store.pokemonNameForSearch}
+        currentPokemonToShow={store.currentPokemonToShow}
       />
       <Paginator
         onChange={store.handleChangePageOptions}

@@ -129,7 +129,7 @@ export function pokemonStoreFunction() {
         });
       },
       getPokemonNameForSearch(pokemonName) {
-        this.pokemonNameForSearch = pokemonName;
+        this.selectedPokemonName = pokemonName;
       },
       searchPokemonByName(pokemonName) {
         this.currentPokemonToShow = null;
@@ -140,10 +140,10 @@ export function pokemonStoreFunction() {
               return pokemon.name;
             });
             const searchResult = arrayOfPokemonsName.find((name) => {
-              return name === this.pokemonNameForSearch;
+              return name === this.selectedPokemonName;
             });
-            if (searchResult) {
-              runInAction(() => {
+            runInAction(() => {
+              if (searchResult) {
                 this.currentPokemonToShow = pokemonAPI
                   .getPokemonDescription(searchResult)
                   .then((response) => {
@@ -156,10 +156,10 @@ export function pokemonStoreFunction() {
                       tags: response.data.types,
                     };
                   });
-              });
-            }
+              }
+              console.log(this.pokemons);
+            });
           });
-        console.log(this.currentPokemonToShow);
       },
       onClickPokemonFromList(pokemonName) {
         runInAction(() => {
