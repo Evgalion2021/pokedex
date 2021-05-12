@@ -1,4 +1,4 @@
-import { Row } from 'antd';
+import { Button, Row } from 'antd';
 import { useEffect, useMemo } from 'react';
 import classes from './Catalog.module.scss';
 import Pokemon from './Pokemon/Pokemon';
@@ -15,6 +15,7 @@ const Catalog = ({
   pokemonNameForSearch,
   pokemonsSelectedByTags,
   currentPokemonToShow,
+  onClickPokemonFromList,
 }) => {
   useEffect(() => {
     if (selectedTags.length) {
@@ -33,30 +34,64 @@ const Catalog = ({
     pokemonNameForSearch,
     searchPokemonByName,
   ]);
-  console.log(currentPokemonToShow);
 
   const currentContent = useMemo(() => {
     if (selectedTags.length) {
-      return (
-        <div>
-          {Object.keys(pokemonsSelectedByTags).map((key) => {
-            return (
-              <>
-                <h2>{key}</h2>
-                {pokemonsSelectedByTags[key].map((name) => {
-                  return <span>{name} </span>;
-                })}
-              </>
-            );
-          })}
-        </div>
-      );
+      if (currentPokemonToShow) {
+        return (
+          <Pokemon
+            pokemon={currentPokemonToShow}
+            getTagColor={getTagColor}
+          ></Pokemon>
+        );
+      } else {
+        return (
+          <div>
+            {Object.keys(pokemonsSelectedByTags).map((key) => {
+              return (
+                <>
+                  <h2>{key}</h2>
+                  {pokemonsSelectedByTags[key].map((name) => {
+                    return (
+                      <Button
+                        className={classes.item}
+                        key={name}
+                        onClick={() => {
+                          return onClickPokemonFromList(name);
+                        }}
+                      >
+                        {name}
+                      </Button>
+                    );
+                  })}
+                </>
+              );
+            })}
+          </div>
+        );
+      }
     } else if (pokemonNameForSearch) {
       if (currentPokemonToShow) {
-        {
-          console.log(currentPokemonToShow);
-        }
-        return <div>{currentPokemonToShow.name}</div>;
+        return (
+          <Pokemon
+            pokemon={currentPokemonToShow}
+            getTagColor={getTagColor}
+          ></Pokemon>
+        );
+      } else if (pokemonsSelectedByTags.length > 0) {
+        return pokemonsSelectedByTags[0].search.map((name) => {
+          return (
+            <Button
+              className={classes.item}
+              key={name}
+              onClick={() => {
+                return onClickPokemonFromList(name);
+              }}
+            >
+              {name + ' '}
+            </Button>
+          );
+        });
       } else {
         return <div>pokemon named {pokemonNameForSearch} doesn't exist</div>;
       }
@@ -82,6 +117,7 @@ const Catalog = ({
     getTagColor,
     pokemonsSelectedByTags,
     currentPokemonToShow,
+    onClickPokemonFromList,
   ]);
 
   return <div className={classes.container}>{currentContent}</div>;

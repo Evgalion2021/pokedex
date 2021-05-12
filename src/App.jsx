@@ -35,10 +35,15 @@ const App = observer(() => {
         searchPokemonByName={store.searchPokemonByName}
         pokemonNameForSearch={store.pokemonNameForSearch}
         currentPokemonToShow={store.currentPokemonToShow}
+        onClickPokemonFromList={store.onClickPokemonFromList}
       />
       <Paginator
         onChange={store.handleChangePageOptions}
         totalCount={store.pageOptions.totalCount}
+        currentPokemonToShow={store.currentPokemonToShow}
+        pokemonNameForSearch={store.pokemonNameForSearch}
+        selectedTags={store.selectedTags}
+        backToList={store.backToList}
       />
     </div>
   );

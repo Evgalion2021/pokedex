@@ -6,7 +6,7 @@ export function pokemonStoreFunction() {
     {
       pageOptions: {
         currentPage: 1,
-        pageSize: 10,
+        pageSize: 12,
         totalCount: 1118,
       },
       pokemons: [],
@@ -36,9 +36,8 @@ export function pokemonStoreFunction() {
                   return {
                     name: response.data.name,
                     id: response.data.id,
-                    img:
-                      response.data.sprites.other['official-artwork']
-                        .front_default,
+                    img: response.data.sprites.other['official-artwork']
+                      .front_default,
                     tags: response.data.types,
                   };
                 });
@@ -60,6 +59,9 @@ export function pokemonStoreFunction() {
         });
       },
       handleChangeSelectedTags(tag) {
+        this.pokemonsSelectedByTags = [];
+        this.pokemonNameForSearch = '';
+        this.currentPokemonToShow = null;
         this.selectedTags = tag;
       },
       getTagColor(tag) {
@@ -124,12 +126,13 @@ export function pokemonStoreFunction() {
           }, {});
 
           runInAction(() => {
+            console.log(result);
             this.pokemonsSelectedByTags = result;
           });
         });
       },
       getPokemonNameForSearch(pokemonName) {
-        this.pokemonNameForSearch = pokemonName;
+        this.pokemonNameForSearch = pokemonName.toLowerCase();
       },
       searchPokemonByName(pokemonName) {
         this.currentPokemonToShow = null;
@@ -139,44 +142,35 @@ export function pokemonStoreFunction() {
             const arrayOfPokemonsName = response.data.results.map((pokemon) => {
               return pokemon.name;
             });
-            const searchResult = arrayOfPokemonsName.find((name) => {
-              return name === this.pokemonNameForSearch;
+            const searchResult = arrayOfPokemonsName.filter((name) => {
+              return name.includes(this.pokemonNameForSearch);
             });
-            if (searchResult) {
+            if (searchResult.length > 0) {
               runInAction(() => {
-                this.currentPokemonToShow = pokemonAPI
-                  .getPokemonDescription(searchResult)
-                  .then((response) => {
-                    return {
-                      name: response.data.name,
-                      id: response.data.id,
-                      img:
-                        response.data.sprites.other['official-artwork']
-                          .front_default,
-                      tags: response.data.types,
-                    };
-                  });
+                this.pokemonsSelectedByTags = [{ search: searchResult }];
               });
             }
           });
-        console.log(this.currentPokemonToShow);
       },
       onClickPokemonFromList(pokemonName) {
-        runInAction(() => {
-          this.currentPokemonToShow = pokemonAPI
-            .getPokemonDescription(pokemonName)
-            .then((response) => {
-              return {
-                name: response.data.name,
-                id: response.data.id,
-                img:
-                  response.data.sprites.other['official-artwork'].front_default,
-                tags: response.data.types,
-              };
-            });
+        pokemonAPI.getPokemonDescription(pokemonName).then((response) => {
+          runInAction(() => {
+            this.currentPokemonToShow = {
+              name: response.data.name,
+              id: response.data.id,
+              img: response.data.sprites.other['official-artwork']
+                .front_default,
+              tags: response.data.types,
+            };
+          });
         });
-
-        console.log(this.selectedPokemonWithTag);
+      },
+      backToList() {
+        this.pokemonNameForSearch = '';
+        this.pokemonsSelectedByTags = [];
+        this.currentPokemonToShow = null;
+        this.selectedTags = [];
+        this.pokemons = [];
       },
     },
     {
@@ -196,6 +190,7 @@ export function pokemonStoreFunction() {
       getPokemonNameForSearch: action.bound,
       searchPokemonByName: action.bound,
       onClickPokemonFromList: action.bound,
+      backToList: action.bound,
     },
   );
 }
