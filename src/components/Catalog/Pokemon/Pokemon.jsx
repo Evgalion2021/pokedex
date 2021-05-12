@@ -29,5 +29,5 @@ const Pokemon = ({ pokemon, getTagColor }) => {
     </Col>
   );
 };
-
+// TODO: don`t use export defaults;
 export default Pokemon;

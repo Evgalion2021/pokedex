@@ -34,9 +34,11 @@ const Catalog = ({
     pokemonNameForSearch,
     searchPokemonByName,
   ]);
-
+  // TODO: don`t use useMemo return <div /> if no data from store; don`t use arrow function 
+  // TODO: move all  returns to separate function 
   const currentContent = useMemo(() => {
     if (selectedTags.length) {
+      // TODO: must be first if 
       if (currentPokemonToShow) {
         return (
           <Pokemon
@@ -71,6 +73,7 @@ const Catalog = ({
         );
       }
     } else if (pokemonNameForSearch) {
+      // TODO: must be first if 
       if (currentPokemonToShow) {
         return (
           <Pokemon
@@ -122,5 +125,5 @@ const Catalog = ({
 
   return <div className={classes.container}>{currentContent}</div>;
 };
-
+// TODO: don`t use export defaults;
 export default Catalog;

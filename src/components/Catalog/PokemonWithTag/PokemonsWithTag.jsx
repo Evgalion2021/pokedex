@@ -14,5 +14,5 @@ const PokemonsWithTag = ({ selectedTags, pokemonsWithTags }) => {
     </Row>
   );
 };
-
+// TODO: don`t use export defaults;
 export default PokemonsWithTag;

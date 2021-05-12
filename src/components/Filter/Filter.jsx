@@ -12,8 +12,10 @@ const Filter = ({
   useEffect(() => {
     getTags();
   }, [getTags]);
+  // TODO: declare consts before useEffect;
   const { Search } = Input;
   const { Option } = Select;
+  // TODO: make function renderTags; use `map` not `for`
   const children = [];
   for (let i = 0; i < tags.length; i++) {
     children.push(<Option key={tags[i]}>{tags[i]}</Option>);
@@ -39,5 +41,5 @@ const Filter = ({
     </div>
   );
 };
-
+// TODO: don`t use export defaults;
 export default Filter;

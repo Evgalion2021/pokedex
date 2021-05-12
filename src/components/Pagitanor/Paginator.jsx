@@ -2,6 +2,7 @@ import { Pagination } from 'antd';
 import { useMemo } from 'react';
 import classes from './Paginator.module.scss';
 
+// TODO: use export here
 const Paginator = ({
   onChange,
   totalCount,
@@ -10,6 +11,7 @@ const Paginator = ({
   selectedTags,
   backToList,
 }) => {
+  // TODO: don`t use useMemo return <div /> if no data from store; don`t use arrow function 
   const currentPaginator = useMemo(() => {
     if (currentPokemonToShow || selectedTags.length || pokemonNameForSearch) {
       return (
@@ -44,4 +46,5 @@ const Paginator = ({
   return <div className={classes.container}>{currentPaginator}</div>;
 };
 
+// TODO: don`t use export default 
 export default Paginator;
