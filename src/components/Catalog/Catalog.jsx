@@ -54,6 +54,10 @@ const Catalog = ({
                 <>
                   <h2>{key}</h2>
                   {pokemonsSelectedByTags[key].map((name) => {
+                     // TODO: make new function onClickHandler() {
+                    //      return onClickPokemonFromList(name)
+                    // }
+                    // and use onClick={onClickHandler}
                     return (
                       <Button
                         className={classes.item}
@@ -83,6 +87,10 @@ const Catalog = ({
         );
       } else if (pokemonsSelectedByTags.length > 0) {
         return pokemonsSelectedByTags[0].search.map((name) => {
+          // TODO: make new function onClickHandler() {
+          //      return onClickPokemonFromList(name)
+          // }
+          // and use onClick={onClickHandler}
           return (
             <Button
               className={classes.item}

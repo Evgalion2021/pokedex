@@ -8,6 +8,7 @@ import { useStore } from './hooks/useStore';
 const App = observer(() => {
   const store = useStore();
 
+  // TODO: use react fragment like main wraper; use css not inline styles
   return (
     <div>
       <div style={{ textAlign: 'center' }}>

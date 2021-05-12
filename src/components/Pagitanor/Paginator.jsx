@@ -14,6 +14,7 @@ const Paginator = ({
   // TODO: don`t use useMemo return <div /> if no data from store; don`t use arrow function 
   const currentPaginator = useMemo(() => {
     if (currentPokemonToShow || selectedTags.length || pokemonNameForSearch) {
+      // TODO: use onClick={backToList} not arrow function
       return (
         <button
           onClick={() => {
