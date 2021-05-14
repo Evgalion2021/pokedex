@@ -8,6 +8,7 @@ export const Filter = ({
   tags,
   changeSelectedTags,
   getPokemonNameForSearch,
+  selectedTags,
 }) => {
   const { Search } = Input;
   const { Option } = Select;
@@ -26,6 +27,7 @@ export const Filter = ({
         style={{ width: '40%', textAlign: 'left', marginRight: '10%' }}
         placeholder='Pokemon Tags Search'
         onChange={changeSelectedTags}
+        value={selectedTags}
       >
         {children}
       </Select>

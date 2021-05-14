@@ -7,8 +7,7 @@ export function pokemonStoreFunction() {
       pageOptions: {
         currentPage: 1,
         pageSize: 12,
-        // This must be not hardcoded value from the beginning
-        totalCount: 1118,
+        totalCount: null,
       },
       pokemons: [],
       selectedTags: [],
@@ -27,7 +26,7 @@ export function pokemonStoreFunction() {
           .getPokemons(currentPage, pageSize)
           .then((response) => {
             runInAction(() => {
-              this.totalCount = response.data.count;
+              this.pageOptions.totalCount = response.data.count;
             });
             return response.data.results;
           })
@@ -86,13 +85,13 @@ export function pokemonStoreFunction() {
           }, {});
 
           runInAction(() => {
-            console.log(result);
             this.pokemonsSelectedByTags = result;
           });
         });
       },
 
       getPokemonNameForSearch(pokemonName) {
+        this.selectedTags = [];
         this.pokemonNameForSearch = pokemonName.toLowerCase();
       },
 

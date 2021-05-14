@@ -9,7 +9,7 @@ export const Paginator = ({
   selectedTags,
   backToList,
 }) => {
-  const currentPaginator = function () {
+  function currentPaginator() {
     if (currentPokemonToShow || selectedTags.length || pokemonNameForSearch) {
       return <button onClick={backToList}>BACK TO FULL POKEMON LIST</button>;
     } else {
@@ -23,7 +23,7 @@ export const Paginator = ({
         />
       );
     }
-  };
+  }
 
   return <div className={classes.container}>{currentPaginator()}</div>;
 };

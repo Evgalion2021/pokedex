@@ -22,6 +22,7 @@ const App = observer(() => {
         getTags={store.getTags}
         changeSelectedTags={store.handleChangeSelectedTags}
         getPokemonNameForSearch={store.getPokemonNameForSearch}
+        selectedTags={store.selectedTags}
       />
       <Catalog
         currentPage={store.pageOptions.currentPage}

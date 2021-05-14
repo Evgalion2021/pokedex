@@ -1,5 +1,5 @@
 import { Button, Row } from 'antd';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import classes from './Catalog.module.scss';
 import { Pokemon } from './Pokemon/Pokemon';
 
@@ -38,7 +38,7 @@ export const Catalog = ({
       <div>
         {Object.keys(pokemonsSelectedByTags).map((key) => {
           return (
-            <>
+            <Fragment key={key}>
               <h2>{key}</h2>
               {pokemonsSelectedByTags[key].map((name) => {
                 return (
@@ -51,7 +51,7 @@ export const Catalog = ({
                   </Button>
                 );
               })}
-            </>
+            </Fragment>
           );
         })}
       </div>
