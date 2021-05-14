@@ -3,23 +3,20 @@ import { useEffect } from 'react';
 import { Input } from 'antd';
 import classes from './Filter.module.scss';
 
-const Filter = ({
+export const Filter = ({
   getTags,
   tags,
   changeSelectedTags,
   getPokemonNameForSearch,
 }) => {
+  const { Search } = Input;
+  const { Option } = Select;
   useEffect(() => {
     getTags();
   }, [getTags]);
-  // TODO: declare consts before useEffect;
-  const { Search } = Input;
-  const { Option } = Select;
-  // TODO: make function renderTags; use `map` not `for`
-  const children = [];
-  for (let i = 0; i < tags.length; i++) {
-    children.push(<Option key={tags[i]}>{tags[i]}</Option>);
-  }
+  const children = tags.map((tag) => {
+    return <Option key={tag}>{tag}</Option>;
+  });
 
   return (
     <div className={classes.container}>
@@ -41,5 +38,3 @@ const Filter = ({
     </div>
   );
 };
-// TODO: don`t use export defaults;
-export default Filter;

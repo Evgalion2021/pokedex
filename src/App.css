@@ -1,1 +1,4 @@
-@import "~antd/dist/antd.css";
+@import '~antd/dist/antd.css';
+.mainImg {
+  margin: '0 auto';
+}

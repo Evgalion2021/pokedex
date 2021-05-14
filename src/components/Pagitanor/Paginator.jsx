@@ -1,9 +1,7 @@
 import { Pagination } from 'antd';
-import { useMemo } from 'react';
 import classes from './Paginator.module.scss';
 
-// TODO: use export here
-const Paginator = ({
+export const Paginator = ({
   onChange,
   totalCount,
   currentPokemonToShow,
@@ -11,19 +9,9 @@ const Paginator = ({
   selectedTags,
   backToList,
 }) => {
-  // TODO: don`t use useMemo return <div /> if no data from store; don`t use arrow function 
-  const currentPaginator = useMemo(() => {
+  const currentPaginator = function () {
     if (currentPokemonToShow || selectedTags.length || pokemonNameForSearch) {
-      // TODO: use onClick={backToList} not arrow function
-      return (
-        <button
-          onClick={() => {
-            return backToList();
-          }}
-        >
-          BACK TO FULL POKEMON LIST
-        </button>
-      );
+      return <button onClick={backToList}>BACK TO FULL POKEMON LIST</button>;
     } else {
       return (
         <Pagination
@@ -35,17 +23,7 @@ const Paginator = ({
         />
       );
     }
-  }, [
-    currentPokemonToShow,
-    selectedTags,
-    pokemonNameForSearch,
-    onChange,
-    totalCount,
-    backToList,
-  ]);
+  };
 
-  return <div className={classes.container}>{currentPaginator}</div>;
+  return <div className={classes.container}>{currentPaginator()}</div>;
 };
-
-// TODO: don`t use export default 
-export default Paginator;
